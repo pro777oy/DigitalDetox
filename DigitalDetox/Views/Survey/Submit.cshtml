@@ -1,0 +1,41 @@
+﻿@model DigitalDetox.Models.Student
+@{
+    ViewData["Title"] = "Weekly Survey Submission";
+    var questions = ViewBag.Questions as List<DigitalDetox.Models.Question>;
+}
+
+<h2>Submit Weekly Survey</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<form asp-action="Submit" method="post">
+    <div>
+        <label>Name:</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <div>
+        <label>Class:</label>
+        <input asp-for="Class" class="form-control" required />
+    </div>
+    <div>
+        <label>Roll:</label>
+        <input asp-for="Roll" class="form-control" required />
+    </div>
+
+    <hr />
+    <h4>Answer the following questions (Yes/No):</h4>
+
+    @for (int i = 0; i < questions.Count; i++)
+    {
+        <div class="form-group mb-2">
+            <label>@questions[i].QuestionText</label><br />
+            <input type="radio" name="answers[@questions[i].QuestionId]" value="true" required /> Yes
+            <input type="radio" name="answers[@questions[i].QuestionId]" value="false" /> No
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
