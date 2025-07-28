@@ -90,8 +90,8 @@ public class SurveyController(ApplicationDbContext context) : Controller
             .OrderByDescending(x => x.YesCount)
             .ToList();
 
-        ViewBag.FromDate = fromDate?.ToString("yyyy-MM-dd");
-        ViewBag.ToDate = toDate?.ToString("yyyy-MM-dd");
+        ViewBag.FromDate = fromDate?.ToString("dd-MMMM-yyyy");
+        ViewBag.ToDate = toDate?.ToString("dd-MMMM-yyyy");
 
         return View(leaderboard);
     }
